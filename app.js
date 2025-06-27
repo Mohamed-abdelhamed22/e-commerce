@@ -1,5 +1,7 @@
+const path = require('path');
 const http = require('http');
 const express = require('express');
+const rootDir = require('./util/path');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -12,19 +14,8 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).send('<h1>Page Not Found</h1>');
-    });
-
-
-
-
-
-
-
-
-
-
-
+    res.status(404).sendFile(path.join(rootDir ,'views', 'error.html'));
+});
 
 
 app.listen(3000);
